@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodies_palpa/home/food_page_body.dart';
+import 'package:foodies_palpa/pages/home/food_page_body.dart';
 import 'package:foodies_palpa/utils/colors.dart';
+import 'package:foodies_palpa/utils/dimensions.dart';
 import 'package:foodies_palpa/widgets/big_text.dart';
 import 'package:foodies_palpa/widgets/small_text.dart';
 
@@ -17,9 +18,11 @@ class _MainFoodPageState extends State<MainFoodPage> {
     return Scaffold(
       body: Column(
         children: [
+          //showing the header
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            margin: EdgeInsets.symmetric(
+                vertical: Dimensions.height30, horizontal: Dimensions.width20),
+            padding: EdgeInsets.symmetric(horizontal: Dimensions.width20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -36,10 +39,11 @@ class _MainFoodPageState extends State<MainFoodPage> {
                 ),
                 Center(
                   child: Container(
-                    width: 45,
-                    height: 45,
+                    width: Dimensions.height45,
+                    height: Dimensions.height45,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius15),
                         color: AppColors.mainColor),
                     child: const Icon(Icons.search, color: Colors.white),
                   ),
@@ -47,7 +51,12 @@ class _MainFoodPageState extends State<MainFoodPage> {
               ],
             ),
           ),
-          const FoodPageBody()
+          //showing the body
+          const Expanded(
+            child: SingleChildScrollView(
+              child: FoodPageBody(),
+            ),
+          )
         ],
       ),
     );

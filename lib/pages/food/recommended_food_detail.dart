@@ -26,7 +26,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             ),
             toolbarHeight: 75,
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(20),
+              preferredSize: Size.fromHeight(Dimensions.height20),
               child: Container(
                 padding: EdgeInsets.only(
                     top: Dimensions.height10, bottom: Dimensions.height10),

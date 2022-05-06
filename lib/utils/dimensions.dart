@@ -11,6 +11,7 @@ class Dimensions {
   static double pageViewTextController = screenHeight / 5.69;
 
 //dynamic height for padding and margin
+  static double height5 = screenHeight / 136.684;
   static double height10 = screenHeight / 70.34;
   static double height15 = screenHeight / 47.56;
   static double height20 = screenHeight / 36.17;

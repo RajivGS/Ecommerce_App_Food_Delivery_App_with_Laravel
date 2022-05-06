@@ -21,31 +21,34 @@ class AppColumn extends StatelessWidget {
           Wrap(
               children: List.generate(
                   5,
-                  (index) =>
-                      Icon(Icons.star, color: AppColors.mainColor, size: 15))),
-          const SizedBox(width: 10),
+                  (index) => const Icon(Icons.star,
+                      color: AppColors.mainColor, size: 15))),
+          SizedBox(width: Dimensions.height10),
           SmallText(text: "4.5"),
-          const SizedBox(width: 10),
+          SizedBox(width: Dimensions.height10),
           SmallText(text: "1287 "),
-          const SizedBox(width: 4),
+          SizedBox(width: Dimensions.width10),
           SmallText(text: "comments"),
         ]),
         SizedBox(height: Dimensions.height20),
         // Time and Distance
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          IconAndTextWidget(
-              icon: Icons.circle_sharp,
-              text: "Normal",
-              iconColor: AppColors.iconColor1),
-          IconAndTextWidget(
-              icon: Icons.location_on,
-              text: "1.7Km",
-              iconColor: AppColors.mainColor),
-          IconAndTextWidget(
-              icon: Icons.access_time_rounded,
-              text: "32min",
-              iconColor: AppColors.iconColor2),
-        ])
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            IconAndTextWidget(
+                icon: Icons.circle_sharp,
+                text: "Normal",
+                iconColor: AppColors.iconColor1),
+            IconAndTextWidget(
+                icon: Icons.location_on,
+                text: "1.7Km",
+                iconColor: AppColors.mainColor),
+            IconAndTextWidget(
+                icon: Icons.access_time_rounded,
+                text: "32min",
+                iconColor: AppColors.iconColor2),
+          ],
+        )
       ],
     );
   }

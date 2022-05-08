@@ -1,11 +1,13 @@
+// ignore_for_file: avoid_print
+
 import 'package:foodies_palpa/data/repository/recommended_product_repo.dart';
 import 'package:foodies_palpa/models/product_model.dart';
 import 'package:get/get.dart';
 
 class RecommendedProductController extends GetxController {
   final RecommenededProductRepo recommendedProductRepo;
+  RecommendedProductController({required this.recommendedProductRepo});
 
-  RecommendedProductController(this.recommendedProductRepo);
   List<dynamic> _recommendedProductList = [];
   List<dynamic> get recommendedProductList => _recommendedProductList;
 
@@ -19,10 +21,9 @@ class RecommendedProductController extends GetxController {
       _recommendedProductList = [];
       _recommendedProductList.addAll(Product.fromJson(response.body).products);
       _isLoaded = true;
-      print("ADD");
-      update(); // more like setState
+      update();
     } else {
-      print("SDD");
+      print('could not get products recommended');
     }
   }
 }

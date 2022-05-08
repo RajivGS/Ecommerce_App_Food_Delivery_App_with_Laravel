@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_adjacent_string_concatenation
 
 import 'package:flutter/material.dart';
+import 'package:foodies_palpa/routes/app_router.dart';
 import 'package:foodies_palpa/utils/colors.dart';
 import 'package:foodies_palpa/utils/dimensions.dart';
 import 'package:foodies_palpa/widgets/app_icon.dart';
 import 'package:foodies_palpa/widgets/big_text.dart';
 import 'package:foodies_palpa/widgets/expandable_text.dart';
+import 'package:get/get.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
   const RecommendedFoodDetail({Key? key}) : super(key: key);
@@ -17,10 +19,15 @@ class RecommendedFoodDetail extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                AppIcon(icon: Icons.clear),
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.getInitial());
+                    },
+                    child: AppIcon(icon: Icons.clear)),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),

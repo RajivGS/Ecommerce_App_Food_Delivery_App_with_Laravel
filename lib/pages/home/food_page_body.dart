@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodies_palpa/controllers/popular_product_controller.dart';
 import 'package:foodies_palpa/controllers/recommended_product_controller.dart';
 import 'package:foodies_palpa/models/product_model.dart';
+import 'package:foodies_palpa/routes/app_router.dart';
 import 'package:foodies_palpa/utils/app_constants.dart';
 import 'package:foodies_palpa/utils/colors.dart';
 import 'package:foodies_palpa/utils/dimensions.dart';
@@ -10,7 +11,7 @@ import 'package:foodies_palpa/widgets/app_column.dart';
 import 'package:foodies_palpa/widgets/big_text.dart';
 import 'package:foodies_palpa/widgets/icon__and_text._widget.dart';
 import 'package:foodies_palpa/widgets/small_text.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -24,45 +25,34 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   var _currentPageValue = 0.0;
   final double _scaleFactor = 0.8;
   final double _height = Dimensions.pageViewContainer;
-  @override
-  void initState() {
-    super.initState();
-    pageController.addListener(() {
-      setState(() {
-        _currentPageValue = pageController.page!;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //Slider Section
-        GetBuilder<PopularProductController>(builder: (popularProduts) {
-          return popularProduts.isLoaded
-              ? SizedBox(
-                  height: Dimensions.pageView,
-                  child: PageView.builder(
-                    controller: pageController,
-                    itemCount: popularProduts.popularProductList.length,
-                    itemBuilder: (context, index) {
-                      return _buildPageItem(
-                          index, popularProduts.popularProductList[index]);
-                    },
-                  ))
-              : const Center(
-                  child: CircularProgressIndicator(),
-                );
-        }),
+        //Slider Section with Popular List
+        GetBuilder<PopularProductController>(
+          builder: (popularProduts) {
+            return popularProduts.isLoaded
+                ? SizedBox(
+                    height: Dimensions.pageView,
+                    child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularProduts.popularProductList.length,
+                      itemBuilder: (context, index) {
+                        return _buildPageItem(
+                          index,
+                          popularProduts.popularProductList[index],
+                        );
+                      },
+                    ))
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  );
+          },
+        ),
 
-        //dots
+        //Dots - - - - - -
         GetBuilder<PopularProductController>(builder: (popularProducts) {
           return DotsIndicator(
             dotsCount: popularProducts.popularProductList.isEmpty
@@ -70,11 +60,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 : popularProducts.popularProductList.length,
             position: _currentPageValue,
             decorator: DotsDecorator(
-                activeColor: AppColors.mainColor,
-                size: const Size.square(9.0),
-                activeSize: const Size(18.0, 9.0),
-                activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10))),
+              activeColor: AppColors.mainColor,
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+            ),
           );
         }),
 
@@ -108,80 +99,87 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: recommendedProduct.recommendedProductList.length,
                   itemBuilder: ((context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(
-                          left: Dimensions.width20,
-                          right: Dimensions.width20,
-                          bottom: Dimensions.height10),
-                      child: Row(children: [
-                        // Image Section
-                        Container(
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.getRecommendedFood());
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: Dimensions.width20,
+                            right: Dimensions.width20,
+                            bottom: Dimensions.height10),
+                        child: Row(children: [
+                          // Image Section
+                          Container(
                             height: Dimensions.listViewImgSize,
                             width: Dimensions.listViewImgSize,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.radius20),
-                                color: Colors.white38,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                    AppConstants.BASE_URL +
-                                        AppConstants.UPLOAD_URL +
-                                        recommendedProduct
-                                            .recommendedProductList[index].img!,
-                                  ),
-                                ))),
-                        //Text Container
-                        Expanded(
-                          child: Container(
-                            height: Dimensions.listVireTextContainerSize,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topRight:
-                                      Radius.circular(Dimensions.radius20),
-                                  bottomRight:
-                                      Radius.circular(Dimensions.radius20)),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: Dimensions.width10,
-                                  right: Dimensions.width10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  BigText(
-                                    text: recommendedProduct
-                                        .recommendedProductList[index].name!,
-                                  ),
-                                  SmallText(
-                                      text: recommendedProduct
-                                          .recommendedProductList[index]
-                                          .description!),
-                                  SizedBox(height: Dimensions.height5),
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        IconAndTextWidget(
-                                            icon: Icons.circle_sharp,
-                                            text: "Normal",
-                                            iconColor: AppColors.iconColor1),
-                                        IconAndTextWidget(
-                                            icon: Icons.location_on,
-                                            text: "1.7Km",
-                                            iconColor: AppColors.mainColor),
-                                        IconAndTextWidget(
-                                            icon: Icons.access_time_rounded,
-                                            text: "32min",
-                                            iconColor: AppColors.iconColor2),
-                                      ]),
-                                ],
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius20),
+                              color: Colors.white38,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                  AppConstants.baseUrl +
+                                      AppConstants.uploadUrl +
+                                      recommendedProduct
+                                          .recommendedProductList[index].img!,
+                                ),
                               ),
                             ),
                           ),
-                        )
-                      ]),
+                          //Text Container
+                          Expanded(
+                            child: Container(
+                              height: Dimensions.listVireTextContainerSize,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topRight:
+                                        Radius.circular(Dimensions.radius20),
+                                    bottomRight:
+                                        Radius.circular(Dimensions.radius20)),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: Dimensions.width10,
+                                    right: Dimensions.width10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    BigText(
+                                      text: recommendedProduct
+                                          .recommendedProductList[index].name!,
+                                    ),
+                                    SmallText(
+                                        text: recommendedProduct
+                                            .recommendedProductList[index]
+                                            .description!),
+                                    SizedBox(height: Dimensions.height5),
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: const [
+                                          IconAndTextWidget(
+                                              icon: Icons.circle_sharp,
+                                              text: "Normal",
+                                              iconColor: AppColors.iconColor1),
+                                          IconAndTextWidget(
+                                              icon: Icons.location_on,
+                                              text: "1.7Km",
+                                              iconColor: AppColors.mainColor),
+                                          IconAndTextWidget(
+                                              icon: Icons.access_time_rounded,
+                                              text: "32min",
+                                              iconColor: AppColors.iconColor2),
+                                        ]),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ]),
+                      ),
                     );
                   }),
                 )
@@ -219,25 +217,30 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       matrix = Matrix4.diagonal3Values(1, currScale, 1)
         ..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 1);
     }
-
     return Transform(
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: _height,
-            margin: EdgeInsets.symmetric(horizontal: Dimensions.width10),
-            decoration: BoxDecoration(
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(RouteHelper.getPopularFood(index));
+            },
+            child: Container(
+              height: _height,
+              margin: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius30),
                 color: index.isEven
                     ? const Color(0xFF69c5df)
                     : const Color(0xFF9294cc),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(AppConstants.BASE_URL +
-                      AppConstants.UPLOAD_URL +
+                  image: NetworkImage(AppConstants.baseUrl +
+                      AppConstants.uploadUrl +
                       popularProduct.img!),
-                )),
+                ),
+              ),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -277,5 +280,21 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    pageController.addListener(() {
+      setState(() {
+        _currentPageValue = pageController.page!;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 }

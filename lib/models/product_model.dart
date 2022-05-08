@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field, unnecessary_this
+
 class Product {
   int? _totalSize;
   int? _typeId;
@@ -28,17 +30,6 @@ class Product {
       });
     }
   }
-/*
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['total_size'] = totalSize;
-    data['type_id'] = typeId;
-    data['offset'] = offset;
-    if (products != null) {
-      data['products'] = products!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }*/
 }
 
 class ProductModel {
@@ -78,20 +69,4 @@ class ProductModel {
     updatedAt = json['updated_at'];
     typeId = json['type_id'];
   }
-/*
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['description'] = description;
-    data['price'] = price;
-    data['stars'] = stars;
-    data['img'] = img;
-    data['location'] = location;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['type_id'] = typeId;
-    return data;
-  }
-  */
 }

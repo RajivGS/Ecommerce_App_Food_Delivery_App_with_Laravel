@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 class RecommenededProductRepo extends GetxService {
   final ApiClient apiClient;
 
-  RecommenededProductRepo(this.apiClient);
+  RecommenededProductRepo({required this.apiClient});
 
   Future<Response> getRecommendedProductList() async {
-    return await apiClient.getData(AppConstants.RECOMMENEDED_PRODUCT_URI);
+    return await apiClient.getData(AppConstants.recommendedProductUri);
   }
 }

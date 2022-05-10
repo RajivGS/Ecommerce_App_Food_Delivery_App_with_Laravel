@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodies_palpa/utils/colors.dart';
 import 'package:foodies_palpa/utils/dimensions.dart';
 import 'package:foodies_palpa/widgets/big_text.dart';
-import 'package:foodies_palpa/widgets/icon__and_text._widget.dart';
+import 'package:foodies_palpa/widgets/icon_and_text._widget.dart';
 import 'package:foodies_palpa/widgets/small_text.dart';
 
 class AppColumn extends StatelessWidget {
@@ -16,6 +16,7 @@ class AppColumn extends StatelessWidget {
       children: [
         BigText(text: text, size: Dimensions.font26),
         SizedBox(height: Dimensions.height10),
+
         // Commenet Section
         Row(children: [
           Wrap(
@@ -31,6 +32,7 @@ class AppColumn extends StatelessWidget {
           SmallText(text: "comments"),
         ]),
         SizedBox(height: Dimensions.height20),
+
         // Time and Distance
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

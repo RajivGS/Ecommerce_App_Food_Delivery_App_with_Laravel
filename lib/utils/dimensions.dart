@@ -42,7 +42,7 @@ class Dimensions {
 
   //list view size
   static double listViewImgSize = screenWidth / 3.67;
-  static double listVireTextContainerSize = screenWidth / 4.41;
+  static double listViewTextContainerSize = screenWidth / 4.41;
 
   // popular food -
   static double popularfoodImgSize = screenHeight / 1.95;

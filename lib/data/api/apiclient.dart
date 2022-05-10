@@ -1,4 +1,6 @@
 //apiclient for server communication
+// ignore_for_file: unused_field
+
 import 'package:foodies_palpa/utils/app_constants.dart';
 import 'package:get/get.dart';
 

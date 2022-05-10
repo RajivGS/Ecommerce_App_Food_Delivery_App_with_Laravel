@@ -9,7 +9,7 @@ import 'package:foodies_palpa/utils/colors.dart';
 import 'package:foodies_palpa/utils/dimensions.dart';
 import 'package:foodies_palpa/widgets/app_column.dart';
 import 'package:foodies_palpa/widgets/big_text.dart';
-import 'package:foodies_palpa/widgets/icon__and_text._widget.dart';
+import 'package:foodies_palpa/widgets/icon_and_text._widget.dart';
 import 'package:foodies_palpa/widgets/small_text.dart';
 import 'package:get/get.dart';
 
@@ -91,7 +91,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
 
-        //List of Food and Images
+        //Recommended Section List of Food and Images
         GetBuilder<RecommendedProductController>(builder: (recommendedProduct) {
           return recommendedProduct.isLoaded
               ? ListView.builder(
@@ -101,15 +101,15 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemBuilder: ((context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecommendedFood());
+                        Get.toNamed(RouteHelper.getRecommendedFood(index));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
-                            left: Dimensions.width20,
-                            right: Dimensions.width20,
+                            left: Dimensions.width10,
+                            right: Dimensions.width10,
                             bottom: Dimensions.height10),
                         child: Row(children: [
-                          // Image Section
+                          // Recommended Image Section
                           Container(
                             height: Dimensions.listViewImgSize,
                             width: Dimensions.listViewImgSize,
@@ -131,7 +131,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           //Text Container
                           Expanded(
                             child: Container(
-                              height: Dimensions.listVireTextContainerSize,
+                              height: Dimensions.listViewTextContainerSize,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                     topRight:
@@ -147,14 +147,18 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
+                                    //Recommended Product Name
                                     BigText(
                                       text: recommendedProduct
                                           .recommendedProductList[index].name!,
                                     ),
-                                    SmallText(
+
+                                    BigText(
+                                        size: Dimensions.font26 / 2,
                                         text: recommendedProduct
                                             .recommendedProductList[index]
                                             .description!),
+
                                     SizedBox(height: Dimensions.height5),
                                     Row(
                                         mainAxisAlignment:

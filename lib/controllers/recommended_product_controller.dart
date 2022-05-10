@@ -5,12 +5,11 @@ import 'package:foodies_palpa/models/product_model.dart';
 import 'package:get/get.dart';
 
 class RecommendedProductController extends GetxController {
-  final RecommenededProductRepo recommendedProductRepo;
+  final RecommendedProductRepo recommendedProductRepo;
   RecommendedProductController({required this.recommendedProductRepo});
 
-  List<dynamic> _recommendedProductList = [];
-  List<dynamic> get recommendedProductList => _recommendedProductList;
-
+  List<ProductModel> _recommendedProductList = [];
+  List<ProductModel> get recommendedProductList => _recommendedProductList;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 

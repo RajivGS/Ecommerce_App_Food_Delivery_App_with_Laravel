@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:foodies_palpa/utils/colors.dart';
 import 'package:foodies_palpa/utils/dimensions.dart';
@@ -5,11 +7,7 @@ import 'package:foodies_palpa/widgets/small_text.dart';
 
 class ExpandableTextWidget extends StatefulWidget {
   final String text;
-
-  const ExpandableTextWidget({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
+  ExpandableTextWidget({Key? key, required this.text}) : super(key: key);
 
   @override
   State<ExpandableTextWidget> createState() => _ExpandableTextWidgetState();
@@ -20,7 +18,6 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   late String secondHalf;
   bool hiddenText = true;
   double textHeight = Dimensions.screenHeight / 5.63;
-
   @override
   void initState() {
     super.initState();
@@ -30,47 +27,48 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
           widget.text.substring(textHeight.toInt() + 1, widget.text.length);
     } else {
       firstHalf = widget.text;
-      secondHalf = "";
+      secondHalf = '';
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: secondHalf.isEmpty
-            ? SmallText(
-                color: AppColors.paraColor,
-                text: firstHalf,
-                size: Dimensions.font16,
-              )
-            : Column(
-                children: [
-                  SmallText(
-                      height: 1.5,
-                      color: AppColors.paraColor,
-                      size: Dimensions.font16,
-                      text: hiddenText
-                          ? (firstHalf + "...")
-                          : (firstHalf + secondHalf)),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        hiddenText = !hiddenText;
-                      });
-                    },
-                    child: Row(
-                      children: [
-                        SmallText(
-                            text: "Show more", color: AppColors.mainColor),
-                        Icon(
-                            hiddenText
-                                ? Icons.arrow_drop_down
-                                : Icons.arrow_drop_up,
-                            color: AppColors.mainColor),
-                      ],
-                    ),
-                  )
-                ],
-              ));
+      child: secondHalf.isEmpty
+          ? SmallText(
+              text: firstHalf,
+              size: 16,
+            )
+          : Column(
+              children: [
+                SmallText(
+                    height: 1.4,
+                    color: AppColors.paraColor,
+                    size: Dimensions.iconSize16,
+                    text: hiddenText
+                        ? (firstHalf + '...')
+                        : (firstHalf + secondHalf)),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      hiddenText = !hiddenText;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      SmallText(
+                          text: hiddenText ? 'Show more' : ' Scroll back',
+                          color: AppColors.mainColor),
+                      Icon(
+                          hiddenText
+                              ? Icons.arrow_drop_down
+                              : Icons.arrow_drop_up,
+                          color: AppColors.mainColor),
+                    ],
+                  ),
+                )
+              ],
+            ),
+    );
   }
 }

@@ -1,17 +1,13 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:foodies_palpa/controllers/popular_product_controller.dart';
-import 'package:foodies_palpa/controllers/recommended_product_controller.dart';
-import 'package:foodies_palpa/models/product_model.dart';
-import 'package:foodies_palpa/routes/app_router.dart';
-import 'package:foodies_palpa/utils/app_constants.dart';
-import 'package:foodies_palpa/utils/colors.dart';
-import 'package:foodies_palpa/utils/dimensions.dart';
-import 'package:foodies_palpa/widgets/app_column.dart';
-import 'package:foodies_palpa/widgets/big_text.dart';
-import 'package:foodies_palpa/widgets/icon_and_text._widget.dart';
-import 'package:foodies_palpa/widgets/small_text.dart';
+
 import 'package:get/get.dart';
+
+import '../../controllers/controller.dart';
+import '../../models/model.dart';
+import '../../routes/app_router.dart';
+import '../../utils/utilities.dart';
+import '../../widgets/widgets.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -101,7 +97,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemBuilder: ((context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecommendedFood(index));
+                        Get.toNamed(
+                            RouteHelper.getRecommendedFood(index, "home"));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -227,7 +224,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           GestureDetector(
             onTap: () {
-              Get.toNamed(RouteHelper.getPopularFood(index));
+              Get.toNamed(RouteHelper.getPopularFood(index, "home"));
             },
             child: Container(
               height: _height,

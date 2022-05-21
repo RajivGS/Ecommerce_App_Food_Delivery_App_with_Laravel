@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:foodies_palpa/controllers/popular_product_controller.dart';
-import 'package:foodies_palpa/controllers/recommended_product_controller.dart';
-import 'package:foodies_palpa/pages/home/main_food_page.dart';
-import 'package:foodies_palpa/routes/app_router.dart';
 import 'package:get/get.dart';
+import 'controllers/popular_product_controller.dart';
+import 'controllers/recommended_product_controller.dart';
 import 'helper/dependencies.dart' as dep;
+import 'routes/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +20,7 @@ class MyApp extends StatelessWidget {
     Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const MainFoodPage(),
-        initialRoute: RouteHelper.initial,
+        initialRoute: RouteHelper.getInitial(),
         getPages: RouteHelper.routes);
   }
 }

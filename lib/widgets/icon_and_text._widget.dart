@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodies_palpa/widgets/small_text.dart';
+
+import 'small_text.dart';
 
 class IconAndTextWidget extends StatelessWidget {
   final IconData icon;

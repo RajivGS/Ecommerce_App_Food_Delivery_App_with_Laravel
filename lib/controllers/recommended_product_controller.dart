@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_print
 
-import 'package:foodies_palpa/data/repository/recommended_product_repo.dart';
-import 'package:foodies_palpa/models/product_model.dart';
 import 'package:get/get.dart';
+
+import '../data/data.dart';
+import '../models/model.dart';
 
 class RecommendedProductController extends GetxController {
   final RecommendedProductRepo recommendedProductRepo;

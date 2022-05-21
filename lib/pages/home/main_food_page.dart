@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodies_palpa/pages/home/food_page_body.dart';
-import 'package:foodies_palpa/utils/colors.dart';
-import 'package:foodies_palpa/utils/dimensions.dart';
-import 'package:foodies_palpa/widgets/big_text.dart';
-import 'package:foodies_palpa/widgets/small_text.dart';
+
+import '../../utils/utilities.dart';
+import '../../widgets/widgets.dart';
+import '../pages.dart';
 
 class MainFoodPage extends StatefulWidget {
   const MainFoodPage({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
           //showing the header
           Container(
             margin: EdgeInsets.symmetric(
-                vertical: Dimensions.height30, horizontal: Dimensions.width20),
+                vertical: Dimensions.height20, horizontal: Dimensions.width20),
             padding: EdgeInsets.symmetric(horizontal: Dimensions.width20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

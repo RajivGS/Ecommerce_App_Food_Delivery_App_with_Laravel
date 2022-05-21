@@ -1,8 +1,9 @@
 //apiclient for server communication
 // ignore_for_file: unused_field
 
-import 'package:foodies_palpa/utils/app_constants.dart';
 import 'package:get/get.dart';
+
+import '../../utils/utilities.dart';
 
 class ApiClient extends GetConnect implements GetxService {
   late String token;

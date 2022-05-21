@@ -1,15 +1,15 @@
 // once we create the class for api client we'll call that class inside init method adn then call init method from our main function
 
-import 'package:foodies_palpa/controllers/cart_controller.dart';
-import 'package:foodies_palpa/controllers/popular_product_controller.dart';
-import 'package:foodies_palpa/controllers/recommended_product_controller.dart';
-import 'package:foodies_palpa/data/repository/cart_repo.dart';
-import 'package:foodies_palpa/data/repository/popular_product_repo.dart';
-import 'package:foodies_palpa/data/repository/recommended_product_repo.dart';
-import 'package:foodies_palpa/utils/app_constants.dart';
 import 'package:get/get.dart';
 
-import '../data/api/apiclient.dart';
+import '../controllers/cart_controller.dart';
+import '../controllers/popular_product_controller.dart';
+import '../controllers/recommended_product_controller.dart';
+import '../data/api/api_client.dart';
+import '../data/repository/cart_repo.dart';
+import '../data/repository/popular_product_repo.dart';
+import '../data/repository/recommended_product_repo.dart';
+import '../utils/app_constants.dart';
 
 Future<void> init() async {
 //Api Client

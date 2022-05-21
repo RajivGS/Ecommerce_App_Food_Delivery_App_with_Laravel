@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodies_palpa/utils/colors.dart';
-import 'package:foodies_palpa/utils/dimensions.dart';
-import 'package:foodies_palpa/widgets/big_text.dart';
-import 'package:foodies_palpa/widgets/icon_and_text._widget.dart';
-import 'package:foodies_palpa/widgets/small_text.dart';
+
+import '../utils/utilities.dart';
+import 'widgets.dart';
 
 class AppColumn extends StatelessWidget {
   final String text;

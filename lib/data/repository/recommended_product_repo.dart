@@ -1,6 +1,7 @@
-import 'package:foodies_palpa/data/api/apiclient.dart';
-import 'package:foodies_palpa/utils/app_constants.dart';
 import 'package:get/get.dart';
+
+import '../../utils/utilities.dart';
+import '../data.dart';
 
 class RecommendedProductRepo extends GetxService {
   final ApiClient apiClient;

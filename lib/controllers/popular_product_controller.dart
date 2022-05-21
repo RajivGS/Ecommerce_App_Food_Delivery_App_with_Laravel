@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print
 
-import 'package:foodies_palpa/controllers/cart_controller.dart';
-import 'package:foodies_palpa/data/repository/popular_product_repo.dart';
-import 'package:foodies_palpa/models/cart_model.dart';
-import 'package:foodies_palpa/models/product_model.dart';
-import 'package:foodies_palpa/utils/colors.dart';
 import 'package:get/get.dart';
+
+import '../data/data.dart';
+import '../models/model.dart';
+import '../utils/utilities.dart';
+import 'controller.dart';
 
 class PopularProductController extends GetxController {
   final PopularProductRepo popularProductRepo;

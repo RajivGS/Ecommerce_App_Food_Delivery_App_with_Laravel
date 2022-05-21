@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
-import 'package:foodies_palpa/utils/colors.dart';
-import 'package:foodies_palpa/utils/dimensions.dart';
-import 'package:foodies_palpa/widgets/small_text.dart';
+import 'package:foodies_palpa/widgets/widgets.dart';
+
+import '../utils/utilities.dart';
 
 class ExpandableTextWidget extends StatefulWidget {
   final String text;

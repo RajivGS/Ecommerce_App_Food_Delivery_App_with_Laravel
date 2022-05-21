@@ -1,24 +1,20 @@
-// ignore_for_file: prefer_final_fields
-
-import 'package:foodies_palpa/data/repository/cart_repo.dart';
-import 'package:foodies_palpa/models/cart_model.dart';
-import 'package:foodies_palpa/models/product_model.dart';
 import 'package:get/get.dart';
 
-import '../utils/colors.dart';
+import '../data/data.dart';
+import '../models/model.dart';
 
 class CartController extends GetxController {
   final CartRepo cartRepo;
   CartController({required this.cartRepo});
-
+  // ignore: prefer_final_fields
   Map<int, CartModel> _items = {};
-
   Map<int, CartModel> get items => _items;
 
-  void addItem(ProductModel product, int quantity) {
+  void addItem(ProductModel productModel, int quantity) {
     var totalQuantity = 0;
-    if (_items.containsKey(product.id!)) {
-      _items.update(product.id!, (value) {
+    // Upadting the map
+    if (_items.containsKey(productModel.id!)) {
+      _items.update(productModel.id!, (value) {
         // value is an object for this product model
         // old object value + new one and check on it
         totalQuantity = value.quantity! + quantity;
@@ -27,35 +23,38 @@ class CartController extends GetxController {
           name: value.name,
           price: value.price,
           img: value.img,
-          // update and pass new quantity in the cart
-          quantity: value.quantity! + quantity,
+          quantity:
+              value.quantity! + quantity, // update & pass new quantity-> cart
           isExist: true,
           time: DateTime.now().toString(),
+          productModel: productModel,
         );
       });
-
       if (totalQuantity <= 0) {
-        _items.remove(product.id);
+        _items.remove(productModel.id);
       }
-    } else {
+    }
+    // Adding new items in the map
+    else {
       if (quantity > 0) {
-        _items.putIfAbsent(product.id!, () {
+        _items.putIfAbsent(productModel.id!, () {
           return CartModel(
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            img: product.img,
+            id: productModel.id,
+            name: productModel.name,
+            price: productModel.price,
+            img: productModel.img,
             quantity: quantity,
             isExist: true,
             time: DateTime.now().toString(),
+            productModel: productModel,
           );
         });
       } else {
         Get.snackbar(
-            "Item count", "You should at least add an item in the cart!",
-            backgroundColor: AppColors.mainColor);
+            "Item count", "You should at least add 1 item to the cart.");
       }
     }
+    update();
   }
 
   bool existInCart(ProductModel productModel) {
@@ -78,7 +77,7 @@ class CartController extends GetxController {
     return qunatity;
   }
 
-  // returns a feild not a function
+  // returns a field not a function
   int get totalItems {
     var totalQuantity = 0;
     _items.forEach((key, value) {
@@ -93,5 +92,12 @@ class CartController extends GetxController {
     }).toList();
   }
 
-//
+  int get totalAmount {
+    var total = 0;
+
+    _items.forEach((key, value) {
+      total += value.quantity! * value.price!;
+    });
+    return total;
+  }
 }
